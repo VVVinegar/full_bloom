@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FullBloom.dao.User_infoMapper">
+  <resultMap id="BaseResultMap" type="FullBloom.pojo.User_info">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+    <result column="liveness" jdbcType="INTEGER" property="liveness" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="id_number" jdbcType="VARCHAR" property="idNumber" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="delete_time" jdbcType="TIMESTAMP" property="deleteTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_name, sex, nick_name, school, liveness, country, icon, email, password, 
+    phone, id_number, status, create_time, delete_time
+  </sql>
+  <select id="selectByExample" parameterType="FullBloom.pojo.User_infoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="FullBloom.pojo.User_infoExample">
+    delete from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="FullBloom.pojo.User_info">
+    insert into user_info (id, user_name, sex, 
+      nick_name, school, liveness, 
+      country, icon, email, 
+      password, phone, id_number, 
+      status, create_time, delete_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{nickName,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{liveness,jdbcType=INTEGER}, 
+      #{country,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{idNumber,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="FullBloom.pojo.User_info">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="school != null">
+        school,
+      </if>
+      <if test="liveness != null">
+        liveness,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="idNumber != null">
+        id_number,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="deleteTime != null">
+        delete_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="liveness != null">
+        #{liveness,jdbcType=INTEGER},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null">
+        #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null">
+        #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="FullBloom.pojo.User_infoExample" resultType="java.lang.Long">
+    select count(*) from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null">
+        school = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liveness != null">
+        liveness = #{record.liveness,jdbcType=INTEGER},
+      </if>
+      <if test="record.country != null">
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idNumber != null">
+        id_number = #{record.idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteTime != null">
+        delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_info
+    set id = #{record.id,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      liveness = #{record.liveness,jdbcType=INTEGER},
+      country = #{record.country,jdbcType=VARCHAR},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      id_number = #{record.idNumber,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      delete_time = #{record.deleteTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="FullBloom.pojo.User_info">
+    update user_info
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="liveness != null">
+        liveness = #{liveness,jdbcType=INTEGER},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null">
+        id_number = #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteTime != null">
+        delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="FullBloom.pojo.User_info">
+    update user_info
+    set user_name = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      liveness = #{liveness,jdbcType=INTEGER},
+      country = #{country,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      id_number = #{idNumber,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      delete_time = #{deleteTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--根据昵称找用户信息-->
+  <select id="selectByNickname" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+    where nick_name = #{nickname}
+  </select>
+
+</mapper>

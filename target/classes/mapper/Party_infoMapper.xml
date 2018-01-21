@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FullBloom.dao.Party_infoMapper">
+  <resultMap id="BaseResultMap" type="FullBloom.pojo.Party_info">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="sign_up_cost" jdbcType="REAL" property="signUpCost" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="sign_up_count" jdbcType="INTEGER" property="signUpCount" />
+    <result column="is_full" jdbcType="INTEGER" property="isFull" />
+    <result column="sign_up_end_time" jdbcType="TIMESTAMP" property="signUpEndTime" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="FullBloom.pojo.Party_info">
+    <result column="notice notice" jdbcType="LONGVARCHAR" property="notice notice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, address, sign_up_cost, description, type, sign_up_count, is_full, sign_up_end_time, 
+    begin_time, end_time, status
+  </sql>
+  <sql id="Blob_Column_List">
+    notice
+notice
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="FullBloom.pojo.Party_infoExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from party_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="FullBloom.pojo.Party_infoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from party_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from party_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from party_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="FullBloom.pojo.Party_infoExample">
+    delete from party_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="FullBloom.pojo.Party_info">
+    insert into party_info (id, title, address, 
+      sign_up_cost, description, type, 
+      sign_up_count, is_full, sign_up_end_time, 
+      begin_time, end_time, status, 
+      notice
+notice)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{signUpCost,jdbcType=REAL}, #{description,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{signUpCount,jdbcType=INTEGER}, #{isFull,jdbcType=INTEGER}, #{signUpEndTime,jdbcType=TIMESTAMP}, 
+      #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{notice
+notice,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="FullBloom.pojo.Party_info">
+    insert into party_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="signUpCost != null">
+        sign_up_cost,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="signUpCount != null">
+        sign_up_count,
+      </if>
+      <if test="isFull != null">
+        is_full,
+      </if>
+      <if test="signUpEndTime != null">
+        sign_up_end_time,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="notice notice != null">
+        notice
+notice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="signUpCost != null">
+        #{signUpCost,jdbcType=REAL},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="signUpCount != null">
+        #{signUpCount,jdbcType=INTEGER},
+      </if>
+      <if test="isFull != null">
+        #{isFull,jdbcType=INTEGER},
+      </if>
+      <if test="signUpEndTime != null">
+        #{signUpEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="notice notice != null">
+        #{notice
+notice,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="FullBloom.pojo.Party_infoExample" resultType="java.lang.Long">
+    select count(*) from party_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update party_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signUpCost != null">
+        sign_up_cost = #{record.signUpCost,jdbcType=REAL},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.signUpCount != null">
+        sign_up_count = #{record.signUpCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.isFull != null">
+        is_full = #{record.isFull,jdbcType=INTEGER},
+      </if>
+      <if test="record.signUpEndTime != null">
+        sign_up_end_time = #{record.signUpEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.beginTime != null">
+        begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.notice notice != null">
+        notice
+notice = #{record.notice
+notice,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update party_info
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      sign_up_cost = #{record.signUpCost,jdbcType=REAL},
+      description = #{record.description,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      sign_up_count = #{record.signUpCount,jdbcType=INTEGER},
+      is_full = #{record.isFull,jdbcType=INTEGER},
+      sign_up_end_time = #{record.signUpEndTime,jdbcType=TIMESTAMP},
+      begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      notice
+notice = #{record.notice
+notice,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update party_info
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      sign_up_cost = #{record.signUpCost,jdbcType=REAL},
+      description = #{record.description,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      sign_up_count = #{record.signUpCount,jdbcType=INTEGER},
+      is_full = #{record.isFull,jdbcType=INTEGER},
+      sign_up_end_time = #{record.signUpEndTime,jdbcType=TIMESTAMP},
+      begin_time = #{record.beginTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="FullBloom.pojo.Party_info">
+    update party_info
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="signUpCost != null">
+        sign_up_cost = #{signUpCost,jdbcType=REAL},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="signUpCount != null">
+        sign_up_count = #{signUpCount,jdbcType=INTEGER},
+      </if>
+      <if test="isFull != null">
+        is_full = #{isFull,jdbcType=INTEGER},
+      </if>
+      <if test="signUpEndTime != null">
+        sign_up_end_time = #{signUpEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="notice notice != null">
+        notice
+notice = #{notice
+notice,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="FullBloom.pojo.Party_info">
+    update party_info
+    set title = #{title,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      sign_up_cost = #{signUpCost,jdbcType=REAL},
+      description = #{description,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      sign_up_count = #{signUpCount,jdbcType=INTEGER},
+      is_full = #{isFull,jdbcType=INTEGER},
+      sign_up_end_time = #{signUpEndTime,jdbcType=TIMESTAMP},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      notice
+notice = #{notice
+notice,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="FullBloom.pojo.Party_info">
+    update party_info
+    set title = #{title,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      sign_up_cost = #{signUpCost,jdbcType=REAL},
+      description = #{description,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      sign_up_count = #{signUpCount,jdbcType=INTEGER},
+      is_full = #{isFull,jdbcType=INTEGER},
+      sign_up_end_time = #{signUpEndTime,jdbcType=TIMESTAMP},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
